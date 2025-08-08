@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة مؤسسة القعوط للخدمات اللوجستية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+        body { scroll-behavior: smooth; }
+        .modal-backdrop { backdrop-filter: blur(8px); }
+        .slide-up { animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop flex items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 w-full max-w-md mx-4 slide-up">
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-4">🚗</div>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">تسجيل الدخول</h2>
+                <p class="text-gray-600 dark:text-gray-300">مرحباً بك في نظام إدارة القعوط</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">اسم المستخدم</label>
+                    <input type="text" id="username" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-all" placeholder="أدخل اسم المستخدم" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">كلمة المرور</label>
+                    <input type="password" id="password" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-all" placeholder="أدخل كلمة المرور" required>
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg transition-all font-medium">
+                    تسجيل الدخول
+                </button>
+            </form>
+            
+            <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900 rounded-lg">
+                <p class="text-xs text-blue-800 dark:text-blue-200 text-center">
+                    <strong>للتجربة:</strong> اسم المستخدم: admin | كلمة المرور: 123456
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="hidden">
+        <!-- Header -->
+        <header class="bg-blue-600 dark:bg-blue-800 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4 space-x-reverse">
+                        <div class="text-2xl">🚗</div>
+                        <div>
+                            <h1 class="text-xl font-bold">نظام إدارة مؤسسة القعوط</h1>
+                            <p class="text-blue-100 text-sm">للخدمات اللوجستية</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <!-- Notifications -->
+                        <button id="notificationsBtn" class="relative p-2 hover:bg-blue-500 rounded-lg transition-colors">
+                            <span class="text-xl">🔔</span>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+                        
+                        <button id="themeToggle" class="p-2 hover:bg-blue-500 rounded-lg transition-colors">
+                            <span class="text-xl">🌙</span>
+                        </button>
+                        
+                        <button id="langToggle" class="px-3 py-1 bg-blue-500 hover:bg-blue-400 rounded-lg transition-colors text-sm">
+                            English
+                        </button>
+                        
+                        <button id="logoutBtn" class="px-3 py-1 bg-red-500 hover:bg-red-400 rounded-lg transition-colors text-sm">
+                            تسجيل الخروج
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="flex h-[calc(100vh-80px)]">
+            <aside class="w-64 bg-white dark:bg-gray-800 shadow-lg overflow-y-auto">
+                <nav class="p-4">
+                    <ul class="space-y-2">
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="dashboard">📊 لوحة التحكم</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="vehicles">🚗 إدارة المركبات</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="employees">👥 إدارة الموظفين</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="services">🛠️ خدمات المركبات</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="permits">📋 التفاويض</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="insurance">🛡️ التأمين</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="cards">💳 كروت التشغيل</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="drivers">👤 بطاقات السائقين</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="advances">💰 السلف</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="dues">📊 المستحقات</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="reports">📈 التقارير</button></li>
+                        <li><button class="nav-item w-full text-right p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-section="settings">⚙️ الإعدادات</button></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
+                <div class="p-6">
+                    <!-- Dashboard Section -->
+                    <div id="dashboard-section" class="section">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">لوحة التحكم</h2>
+                            <p class="text-gray-600 dark:text-gray-300">نظرة عامة على النظام</p>
+                        </div>
+                        
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">إجمالي المركبات</p>
+                                        <p class="text-2xl font-bold text-gray-800 dark:text-white">45</p>
+                                    </div>
+                                    <div class="text-3xl">🚗</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">إجمالي الموظفين</p>
+                                        <p class="text-2xl font-bold text-gray-800 dark:text-white">128</p>
+                                    </div>
+                                    <div class="text-3xl">👥</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">التنبيهات النشطة</p>
+                                        <p class="text-2xl font-bold text-red-600">12</p>
+                                    </div>
+                                    <div class="text-3xl">🔔</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">المهام المكتملة</p>
+                                        <p class="text-2xl font-bold text-green-600">89%</p>
+                                    </div>
+                                    <div class="text-3xl">✅</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">إجراءات سريعة</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <button class="quick-action-btn p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 transition-colors" data-action="add-vehicle">
+                                    <div class="text-2xl mb-2">🚗</div>
+                                    <div class="text-sm font-medium">إضافة مركبة</div>
+                                </button>
+                                <button class="quick-action-btn p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 transition-colors" data-action="add-employee">
+                                    <div class="text-2xl mb-2">👤</div>
+                                    <div class="text-sm font-medium">إضافة موظف</div>
+                                </button>
+                                <button class="quick-action-btn p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 transition-colors" data-action="add-permit">
+                                    <div class="text-2xl mb-2">📋</div>
+                                    <div class="text-sm font-medium">إضافة تفويض</div>
+                                </button>
+                                <button class="quick-action-btn p-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 transition-colors" data-action="generate-report">
+                                    <div class="text-2xl mb-2">📊</div>
+                                    <div class="text-sm font-medium">إنشاء تقرير</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicles Section -->
+                    <div id="vehicles-section" class="section hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">إدارة المركبات</h2>
+                                <p class="text-gray-600 dark:text-gray-300">إدارة جميع المركبات والمعدات</p>
+                            </div>
+                            <button id="addVehicleBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                ➕ إضافة مركبة جديدة
+                            </button>
+                        </div>
+                        
+                        <!-- Search and Filter -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 mb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <input type="text" placeholder="البحث برقم اللوحة..." class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white">
+                                <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white">
+                                    <option>جميع الأنواع</option>
+                                    <option>شاحنة</option>
+                                    <option>سيارة</option>
+                                    <option>حافلة</option>
+                                </select>
+                                <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white">
+                                    <option>جميع الحالات</option>
+                                    <option>نشط</option>
+                                    <option>صيانة</option>
+                                    <option>متوقف</option>
+                                </select>
+                                <button class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                    🔍 بحث
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Vehicles Table -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                            <table class="w-full">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">رقم اللوحة</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">النوع</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">الموديل</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">السائق</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">الحالة</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                                    <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">أ ب ج 1234</td>
+                                        <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">شاحنة</td>
+                                        <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">مرسيدس 2020</td>
+                                        <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">أحمد محمد</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">نشط</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm">
+                                            <button class="text-blue-600 hover:text-blue-800 ml-2">✏️</button>
+                                            <button class="text-red-600 hover:text-red-800">🗑️</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Other sections will be added here -->
+                    <div id="employees-section" class="section hidden">
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">إدارة الموظفين</h2>
+                        <p class="text-gray-600 dark:text-gray-300">قريباً...</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

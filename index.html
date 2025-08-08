@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظام إدارة مؤسسة القعوط للخدمات اللوجستية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root">
+      <!-- Loading fallback -->
+      <div style="min-height: 100vh; background: #f3f4f6; display: flex; align-items: center; justify-content: center; font-family: 'Cairo', sans-serif;">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🚗</div>
+          <h1 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">نظام إدارة مؤسسة القعوط</h1>
+          <p style="color: #6b7280;">جاري التحميل...</p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+    <style>
+      body { font-family: 'Cairo', sans-serif; }
+      .rtl { direction: rtl; }
+      .ltr { direction: ltr; }
+
+      /* Login Modal Animation */
+      .modal-enter {
+        animation: modalEnter 0.3s ease-out;
+      }
+
+      @keyframes modalEnter {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Input Focus Effects */
+      .form-input:focus {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+      }
+
+      /* Button Hover Effects */
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      }
+
+      /* Background Pattern */
+      .login-bg {
+        background-image:
+          radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">تسجيل الدخول</h2>
+          <p class="text-gray-600">مرحباً بك في نظام إدارة القعوط</p>
+        </div>
+
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">اسم المستخدم</label>
+            <input
+              type="text"
+              id="username"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="أدخل اسم المستخدم"
+              required
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+            <input
+              type="password"
+              id="password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="أدخل كلمة المرور"
+              required
+            >
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+              <span class="mr-2 text-sm text-gray-600">تذكرني</span>
+            </label>
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-500">نسيت كلمة المرور؟</a>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          >
+            تسجيل الدخول
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-600">
+            ليس لديك حساب؟
+            <a href="#" class="text-blue-600 hover:text-blue-500 font-medium">إنشاء حساب جديد</a>
+          </p>
+        </div>
+
+        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+          <p class="text-xs text-blue-800 text-center">
+            <strong>للتجربة:</strong> اسم المستخدم: admin | كلمة المرور: 123456
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header id="mainHeader" class="bg-blue-600 text-white shadow-lg hidden">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-bold">نظام إدارة مؤسسة القعوط للخدمات اللوجستية</h1>
+            <p class="text-blue-100 mt-2">Alqaoot Logistics Management System</p>
+          </div>
+          <div class="flex items-center space-x-4 space-x-reverse">
+            <button id="langToggle" class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-lg transition-colors">
+              English
+            </button>
+            <button id="themeToggle" class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-lg transition-colors">
+              🌙
+            </button>
+            <button id="logoutBtn" class="bg-red-500 hover:bg-red-400 px-4 py-2 rounded-lg transition-colors">
+              تسجيل الخروج
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="container mx-auto px-4 py-8 hidden">
+      <!-- Hero Section -->
+      <section class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4">مرحباً بك في نظام الإدارة الشامل</h2>
+        <p class="text-xl text-gray-600 mb-8">نظام متكامل لإدارة المركبات والموظفين والخدمات اللوجستية</p>
+        <div class="bg-green-100 border-r-4 border-green-500 p-4 rounded-lg max-w-2xl mx-auto">
+          <p class="text-green-800">
+            <strong>✅ تم النشر بنجاح!</strong> النظام يعمل الآن على Netlify
+          </p>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Vehicle Management -->
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-blue-600 text-4xl mb-4">🚗</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">إدارة المركبات</h3>
+          <ul class="text-gray-600 space-y-2">
+            <li>• خدمات المركبات الشاملة</li>
+            <li>• إدارة التفاويض والتصاريح</li>
+            <li>• متابعة التأمين</li>
+            <li>• كروت التشغيل</li>
+          </ul>
+        </div>
+
+        <!-- Employee Management -->
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-green-600 text-4xl mb-4">👥</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">إدارة الموظفين</h3>
+          <ul class="text-gray-600 space-y-2">
+            <li>• بيانات الموظفين</li>
+            <li>• إدارة السلف</li>
+            <li>• المستحقات المالية</li>
+            <li>• بطاقات السائقين</li>
+          </ul>
+        </div>
+
+        <!-- Notifications -->
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-orange-600 text-4xl mb-4">🔔</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">نظام التنبيهات</h3>
+          <ul class="text-gray-600 space-y-2">
+            <li>• تنبيهات الوثائق المنتهية</li>
+            <li>• إشعارات الانتهاء القريب</li>
+            <li>• عداد التنبيهات</li>
+            <li>• تصنيف حسب الأولوية</li>
+          </ul>
+        </div>
+
+        <!-- Reports -->
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-purple-600 text-4xl mb-4">📊</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">التقارير</h3>
+          <ul class="text-gray-600 space-y-2">
+            <li>• تقارير مفصلة</li>
+            <li>• تصدير PDF</li>
+            <li>• إحصائيات شاملة</li>
+            <li>• تحليل البيانات</li>
+          </ul>
+        </div>
+
+        <!-- UI Features -->
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-indigo-600 text-4xl mb-4">🎨</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">واجهة المستخدم</h3>
+          <ul class="text-gray-600 space-y-2">
+            <li>• تصميم حديث ومتجاوب</li>
+            <li>• دعم الوضع المظلم</li>
+            <li>• ثنائية اللغة</li>
+            <li>• سهولة الاستخدام</li>
+          </ul>
+        </div>
+
+        <!-- Technology -->
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+          <div class="text-red-600 text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">التقنيات</h3>
+          <ul class="text-gray-600 space-y-2">
+            <li>• React 18 + TypeScript</li>
+            <li>• Tailwind CSS</li>
+            <li>• Vite للبناء السريع</li>
+            <li>• مكونات حديثة</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Installation Guide -->
+      <section class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">كيفية تشغيل النسخة الكاملة</h3>
+        <div class="bg-gray-100 rounded-lg p-4 font-mono text-sm">
+          <div class="mb-2"># استنساخ المشروع</div>
+          <div class="mb-2">git clone https://github.com/majed542193705-glitch/alqaoot.git</div>
+          <div class="mb-2">cd alqaoot</div>
+          <div class="mb-2"></div>
+          <div class="mb-2"># تثبيت التبعيات</div>
+          <div class="mb-2">npm install</div>
+          <div class="mb-2"></div>
+          <div class="mb-2"># تشغيل الخادم المحلي</div>
+          <div>npm run dev</div>
+        </div>
+      </section>
+
+      <!-- Demo Section -->
+      <section class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg p-8 text-center">
+        <h3 class="text-2xl font-bold mb-4">النسخة التفاعلية الكاملة</h3>
+        <p class="mb-6">للحصول على جميع الميزات التفاعلية، قم بتشغيل المشروع محلياً</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white bg-opacity-20 rounded-lg p-4">
+            <h4 class="font-bold mb-2">🔔 تنبيهات ذكية</h4>
+            <p class="text-sm">نظام تنبيهات متقدم للوثائق</p>
+          </div>
+          <div class="bg-white bg-opacity-20 rounded-lg p-4">
+            <h4 class="font-bold mb-2">🚗 إدارة شاملة</h4>
+            <p class="text-sm">تتبع كامل للمركبات والخدمات</p>
+          </div>
+          <div class="bg-white bg-opacity-20 rounded-lg p-4">
+            <h4 class="font-bold mb-2">📊 تقارير متقدمة</h4>
+            <p class="text-sm">تصدير وتحليل البيانات</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="mainFooter" class="bg-gray-800 text-white py-8 mt-12 hidden">
+      <div class="container mx-auto px-4 text-center">
+        <p class="mb-4">نظام إدارة مؤسسة القعوط للخدمات اللوجستية</p>
+        <p class="text-gray-400">تم التطوير باستخدام React + TypeScript + Tailwind CSS</p>
+        <div class="mt-4">
+          <a href="https://github.com/majed542193705-glitch/alqaoot" class="text-blue-400 hover:text-blue-300">
+            📁 المستودع على GitHub
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Login System
+      const loginModal = document.getElementById('loginModal');
+      const loginForm = document.getElementById('loginForm');
+      const mainHeader = document.getElementById('mainHeader');
+      const mainContent = document.getElementById('mainContent');
+      const mainFooter = document.getElementById('mainFooter');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // Check if user is already logged in
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      if (isLoggedIn) {
+        showMainApp();
+      }
+
+      // Login form submission
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Simple authentication (في التطبيق الحقيقي، يجب التحقق من الخادم)
+        if (username === 'admin' && password === '123456') {
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('username', username);
+          showMainApp();
+          showSuccessMessage('تم تسجيل الدخول بنجاح!');
+        } else {
+          showErrorMessage('اسم المستخدم أو كلمة المرور غير صحيحة');
+        }
+      });
+
+      // Logout functionality
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('username');
+        showLoginModal();
+        showSuccessMessage('تم تسجيل الخروج بنجاح');
+      });
+
+      function showMainApp() {
+        loginModal.classList.add('hidden');
+        mainHeader.classList.remove('hidden');
+        mainContent.classList.remove('hidden');
+        mainFooter.classList.remove('hidden');
+
+        // Initialize animations after showing content
+        setTimeout(initializeAnimations, 100);
+      }
+
+      function showLoginModal() {
+        loginModal.classList.remove('hidden');
+        mainHeader.classList.add('hidden');
+        mainContent.classList.add('hidden');
+        mainFooter.classList.add('hidden');
+
+        // Clear form
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+      }
+
+      function showSuccessMessage(message) {
+        const toast = createToast(message, 'success');
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      function showErrorMessage(message) {
+        const toast = createToast(message, 'error');
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      function createToast(message, type) {
+        const toast = document.createElement('div');
+        const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+        toast.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300`;
+        toast.textContent = message;
+        toast.style.transform = 'translateX(100%)';
+
+        setTimeout(() => {
+          toast.style.transform = 'translateX(0)';
+        }, 100);
+
+        return toast;
+      }
+
+      // Theme Toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        themeToggle.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+      });
+
+      // Language Toggle
+      const langToggle = document.getElementById('langToggle');
+      let isArabic = true;
+
+      langToggle.addEventListener('click', () => {
+        isArabic = !isArabic;
+        document.documentElement.lang = isArabic ? 'ar' : 'en';
+        document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+        langToggle.textContent = isArabic ? 'English' : 'العربية';
+      });
+
+      // Animation effects
+      function initializeAnimations() {
+        const cards = document.querySelectorAll('.bg-white');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.transform = 'translateY(0)';
+              entry.target.style.opacity = '1';
+            }
+          });
+        });
+
+        cards.forEach(card => {
+          card.style.transform = 'translateY(20px)';
+          card.style.opacity = '0';
+          card.style.transition = 'all 0.6s ease';
+          observer.observe(card);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المركبات والموظفين</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .rtl { direction: rtl; }
+        .ltr { direction: ltr; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">نظام إدارة المركبات والموظفين</h1>
+                    <p class="text-blue-100 mt-2">Vehicle & Employee Management System</p>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <button id="langToggle" class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-lg transition-colors">
+                        English
+                    </button>
+                    <button id="themeToggle" class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-lg transition-colors">
+                        🌙
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">مرحباً بك في نظام الإدارة الشامل</h2>
+            <p class="text-xl text-gray-600 mb-8">نظام متكامل لإدارة المركبات والموظفين مع واجهة حديثة وسهلة الاستخدام</p>
+            <div class="bg-yellow-100 border-r-4 border-yellow-500 p-4 rounded-lg max-w-2xl mx-auto">
+                <p class="text-yellow-800">
+                    <strong>ملاحظة:</strong> هذا عرض توضيحي للمشروع. للحصول على النسخة الكاملة، يرجى تشغيل المشروع محلياً.
+                </p>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Vehicle Management -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="text-blue-600 text-4xl mb-4">🚗</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">إدارة المركبات</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• خدمات المركبات الشاملة</li>
+                    <li>• إدارة التفاويض والتصاريح</li>
+                    <li>• متابعة التأمين</li>
+                    <li>• كروت التشغيل</li>
+                </ul>
+            </div>
+
+            <!-- Employee Management -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="text-green-600 text-4xl mb-4">👥</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">إدارة الموظفين</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• بيانات الموظفين</li>
+                    <li>• إدارة السلف</li>
+                    <li>• المستحقات المالية</li>
+                    <li>• بطاقات السائقين</li>
+                </ul>
+            </div>
+
+            <!-- Notifications -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="text-orange-600 text-4xl mb-4">🔔</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">نظام التنبيهات</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• تنبيهات الوثائق المنتهية</li>
+                    <li>• إشعارات الانتهاء القريب</li>
+                    <li>• عداد التنبيهات</li>
+                    <li>• تصنيف حسب الأولوية</li>
+                </ul>
+            </div>
+
+            <!-- Reports -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="text-purple-600 text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">التقارير</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• تقارير مفصلة</li>
+                    <li>• تصدير PDF</li>
+                    <li>• إحصائيات شاملة</li>
+                    <li>• تحليل البيانات</li>
+                </ul>
+            </div>
+
+            <!-- UI Features -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="text-indigo-600 text-4xl mb-4">🎨</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">واجهة المستخدم</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• تصميم حديث ومتجاوب</li>
+                    <li>• دعم الوضع المظلم</li>
+                    <li>• ثنائية اللغة</li>
+                    <li>• سهولة الاستخدام</li>
+                </ul>
+            </div>
+
+            <!-- Technology -->
+            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div class="text-red-600 text-4xl mb-4">⚡</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">التقنيات</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• React 18 + TypeScript</li>
+                    <li>• Tailwind CSS</li>
+                    <li>• Vite للبناء السريع</li>
+                    <li>• مكونات حديثة</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Installation Guide -->
+        <section class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">كيفية تشغيل المشروع</h3>
+            <div class="bg-gray-100 rounded-lg p-4 font-mono text-sm">
+                <div class="mb-2"># استنساخ المشروع</div>
+                <div class="mb-2">git clone https://github.com/your-username/vehicle-management-system.git</div>
+                <div class="mb-2">cd vehicle-management-system</div>
+                <div class="mb-2"></div>
+                <div class="mb-2"># تثبيت التبعيات</div>
+                <div class="mb-2">npm install</div>
+                <div class="mb-2"></div>
+                <div class="mb-2"># تشغيل الخادم المحلي</div>
+                <div>npm run dev</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">نظام إدارة المركبات والموظفين - Vehicle Management System</p>
+            <p class="text-gray-400">تم التطوير باستخدام React + TypeScript + Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            themeToggle.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+        });
+
+        // Language Toggle
+        const langToggle = document.getElementById('langToggle');
+        let isArabic = true;
+        
+        langToggle.addEventListener('click', () => {
+            isArabic = !isArabic;
+            document.documentElement.lang = isArabic ? 'ar' : 'en';
+            document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+            langToggle.textContent = isArabic ? 'English' : 'العربية';
+        });
+    </script>
+</body>
+</html>
