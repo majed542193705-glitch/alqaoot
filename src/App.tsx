@@ -63,10 +63,10 @@ const MainApp: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      <div className="flex h-[calc(100vh-80px)]">
+      <div className="flex h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)]">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <main className="flex-1 overflow-auto lg:mr-0">
-          <div className="p-2 sm:p-4 lg:p-6">
+        <main className="flex-1 overflow-auto lg:mr-0 w-full lg:w-auto">
+          <div className="p-3 sm:p-4 lg:p-6 max-w-full">
             {renderContent()}
           </div>
         </main>
