@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     { id: 'vehicles', icon: Car, label: language === 'ar' ? 'المركبات' : 'Vehicles' },
     { id: 'vehicle-authorizations', icon: Shield, label: language === 'ar' ? 'خدمات المركبات' : 'Vehicle Services' },
     { id: 'advances', icon: CreditCard, label: 'إدارة السلف' },
-    { id: 'dues', icon: Receipt, label: 'المستحقات' },
+    { id: 'dues', icon: Receipt, label: t('dues', language) },
     { id: 'services', icon: Briefcase, label: 'الخدمات' },
     { id: 'expenses', icon: DollarSign, label: 'مصاريف التشغيل' },
     { id: 'reports', icon: BarChart3, label: 'التقارير' },
@@ -83,11 +83,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
                       setActiveTab(item.id);
                       setIsMobileMenuOpen(false); // إغلاق القائمة عند الاختيار في الجوال
                     }}
-                    className={`w-full flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-all duration-200 ${
-                      isActive
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
+                    className={`w-full flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-all duration-200 ${isActive
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
                   >
                     <Icon className="w-5 h-5" />
                     <span className="font-medium text-sm lg:text-base">{item.label}</span>

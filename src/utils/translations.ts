@@ -11,13 +11,13 @@ export const translations = {
     shippingBills: 'بوليصات الشحن',
     settings: 'الإعدادات',
     users: 'المستخدمين',
-    
+
     // تسجيل الدخول
     username: 'اسم المستخدم',
     password: 'كلمة المرور',
     forgotPassword: 'نسيت كلمة المرور أو اسم المستخدم؟',
     invalidCredentials: 'اسم المستخدم أو كلمة المرور غير صحيحة',
-    
+
     // لوحة التحكم
     totalEmployees: 'إجمالي الموظفين',
     activeEmployees: 'الموظفين النشطين',
@@ -25,7 +25,7 @@ export const translations = {
     workingVehicles: 'المركبات العاملة',
     totalAdvances: 'إجمالي السلف',
     expiredDocuments: 'الوثائق المنتهية',
-    
+
     // الموظفين
     addEmployee: 'إضافة موظف',
     editEmployee: 'تعديل موظف',
@@ -48,7 +48,7 @@ export const translations = {
     birthDate: 'تاريخ الميلاد',
     professionInResidence: 'المهنة في الإقامة',
     residenceExpiryDate: 'تاريخ انتهاء الإقامة',
-    
+
     // المركبات
     addVehicle: 'إضافة مركبة',
     plateNumber: 'رقم اللوحة',
@@ -62,7 +62,7 @@ export const translations = {
     truck: 'شاحنة',
     dyna: 'دينا',
     van: 'فان',
-    
+
     // أزرار
     save: 'حفظ',
     cancel: 'إلغاء',
@@ -71,7 +71,7 @@ export const translations = {
     view: 'عرض',
     add: 'إضافة',
     search: 'بحث',
-    
+
     // حالات
     active: 'نشط',
     inactive: 'غير نشط',
@@ -80,14 +80,18 @@ export const translations = {
     sold: 'مباعة',
     valid: 'سارية',
     expired: 'منتهية',
-    
+
     // رسائل
     confirmDelete: 'هل أنت متأكد من الحذف؟',
     deleteSuccess: 'تم الحذف بنجاح',
     saveSuccess: 'تم الحفظ بنجاح',
     errorOccurred: 'حدث خطأ',
-    
+
     // السلف والمستحقات
+    dues: 'إدارة المستحقات',
+    addDue: 'إضافة مستحق',
+    editDue: 'تعديل مستحق',
+    deleteDue: 'حذف مستحق',
     addAdvance: 'إضافة سلفة',
     editAdvance: 'تعديل سلفة',
     deleteAdvance: 'حذف سلفة',
@@ -141,17 +145,18 @@ export const translations = {
     employees: 'Employees',
     vehicles: 'Vehicles',
     advances: 'Advances',
+    dues: 'Dues Management',
     licenses: 'Company Licenses',
     shippingBills: 'Shipping Bills',
     settings: 'Settings',
     users: 'Users',
-    
+
     // Login
     username: 'Username',
     password: 'Password',
     forgotPassword: 'Forgot username or password?',
     invalidCredentials: 'Invalid username or password',
-    
+
     // Dashboard
     totalEmployees: 'Total Employees',
     activeEmployees: 'Active Employees',
@@ -159,7 +164,7 @@ export const translations = {
     workingVehicles: 'Working Vehicles',
     totalAdvances: 'Total Advances',
     expiredDocuments: 'Expired Documents',
-    
+
     // Employees
     addEmployee: 'Add Employee',
     editEmployee: 'Edit Employee',
@@ -182,7 +187,7 @@ export const translations = {
     birthDate: 'Birth Date',
     professionInResidence: 'Profession in Residence',
     residenceExpiryDate: 'Residence Expiry Date',
-    
+
     // Vehicles
     addVehicle: 'Add Vehicle',
     plateNumber: 'Plate Number',
@@ -196,7 +201,7 @@ export const translations = {
     truck: 'Truck',
     dyna: 'Dyna',
     van: 'Van',
-    
+
     // Buttons
     save: 'Save',
     cancel: 'Cancel',
@@ -205,7 +210,7 @@ export const translations = {
     view: 'View',
     add: 'Add',
     search: 'Search',
-    
+
     // Status
     active: 'Active',
     inactive: 'Inactive',
@@ -214,13 +219,13 @@ export const translations = {
     sold: 'Sold',
     valid: 'Valid',
     expired: 'Expired',
-    
+
     // Messages
     confirmDelete: 'Are you sure you want to delete?',
     deleteSuccess: 'Deleted successfully',
     saveSuccess: 'Saved successfully',
     errorOccurred: 'An error occurred',
-    
+
     // Advances
     addAdvance: 'Add Advance',
     editAdvance: 'Edit Advance',
